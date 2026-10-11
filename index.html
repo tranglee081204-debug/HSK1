@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trang Chinese</title>
+<style>
+:root{--bg:#eaf4e6;--card:#f8fcf5;--ink:#233d2c;--mut:#5c7a65;--ac:#6aa578;--ac2:#d9ecd4;--line:#bcd7b8;--ok:#1f8a4c;--okb:#dff3e3;--bad:#d03a3a;--badb:#fbe3e3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17241b;--card:#1f3024;--ink:#e3f1e1;--mut:#9ab9a2;--ac:#7fbb8d;--ac2:#2a4331;--line:#3a5841;--ok:#6fd49a;--okb:#1f4a30;--bad:#ff8a8a;--badb:#4a2323}}
+:root[data-theme="dark"]{--bg:#17241b;--card:#1f3024;--ink:#e3f1e1;--mut:#9ab9a2;--ac:#7fbb8d;--ac2:#2a4331;--line:#3a5841;--ok:#6fd49a;--okb:#1f4a30;--bad:#ff8a8a;--badb:#4a2323}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 "Times New Roman",Times,serif}
+.zh{font-family:"KaiTi","Kaiti SC","STKaiti","楷体","BiauKai",serif}
+main{max-width:760px;margin:0 auto;padding:18px 14px 60px}
+h1{font-size:28px;margin:6px 0 2px}
+.sub{color:var(--mut);margin:0 0 14px}
+.name{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+input[type=text]{font:inherit;padding:7px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);min-width:0}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px}
+.tabs button{flex:none;font:inherit;padding:7px 16px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;cursor:pointer}
+.tabs button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.empty{padding:40px 16px;text-align:center;color:var(--mut);border:2px dashed var(--line);border-radius:14px}
+.ex{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin-bottom:18px}
+.hd{display:flex;gap:12px;align-items:flex-start}
+.chip{flex:none;width:44px;height:44px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-size:24px}
+.hd .zh{font-size:21px;font-weight:700;line-height:1.35}
+.vi{color:var(--mut);margin-top:2px}
+.guide{background:var(--ac2);border-radius:10px;padding:9px 12px;margin:12px 0;font-size:16.5px}
+audio{width:100%;margin:4px 0 12px}
+.it{padding:8px 10px;border:1.5px solid transparent;border-radius:10px;margin-bottom:6px}
+.it.ok{background:var(--okb);border-color:var(--ok)}
+.it.bad{background:var(--badb);border-color:var(--bad)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:2px 10px}
+.o{font:inherit;min-width:42px;padding:4px 12px;margin:2px 4px 2px 0;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+.o.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.syl{display:inline-block;min-width:76px;font-weight:700}
+.f{width:5.5em;text-align:center}
+.f.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.f.bad{border-color:var(--bad);background:var(--badb);color:var(--bad)}
+.ln{margin:2px 0}
+.ans{display:block;color:var(--ok);font-size:16px;font-weight:700}
+.ans:empty{display:none}
+table{border-collapse:collapse;width:100%;margin-top:6px}
+td,th{border:1.5px solid var(--line);text-align:center;padding:2px;font-weight:400}
+td.l{width:56px;font-weight:700}
+td .o{width:100%;min-width:0;margin:0;border:0;background:none;color:transparent;font-size:22px;padding:3px}
+td .o.on{color:#fff;background:var(--ac)}
+tr.ok td{background:var(--okb)}tr.bad td{background:var(--badb)}
+.go{font:inherit;font-weight:700;padding:9px 22px;border:0;border-radius:10px;background:var(--ac);color:#fff;cursor:pointer;margin-top:8px}
+.go[disabled]{opacity:.45;cursor:default}
+.rs{margin-left:12px;font-weight:700}
+.lock .o{pointer-events:none}
+.fin{border:2px solid var(--ac);border-radius:14px;padding:16px;background:var(--card)}
+.big{font-size:44px;font-weight:700;line-height:1}
+.pass{color:var(--ok)}.fail{color:var(--bad)}
+.msg{color:var(--bad);font-weight:700;margin:6px 0}
+.hide{display:none}.go.ghost{background:transparent;color:var(--ac);border:1.5px solid var(--ac);margin-left:6px}.go.ghost[disabled]{opacity:.4}#lb7 .pc{justify-items:center}#lb7 .pc>div{text-align:center}#lb7 .pc img{margin:4px auto}
+.qi{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;padding:6px 8px;margin-bottom:0;border-bottom:1px dashed var(--line);border-radius:0}
+.qi .qs{flex:1 0 100%;text-align:left}.qi.nos .qs{flex:none;min-width:3em}
+.qi .qo{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 22px;flex:1 0 100%}.qi.nos .qo{flex:1 1 0;min-width:0}
+.qi .op{min-width:8em;text-align:center}
+#lb8 .pc{justify-items:center}#lb8 .pc>div{text-align:center}#lb8 .pc img{margin:4px auto}.pcs{text-align:center;margin:4px 0 8px}.side .gbtn{font-weight:700;font-size:14px;letter-spacing:.04em;background:var(--ac2)}.side div[id^=g]{margin:2px 0 8px 6px}.sl.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}.sl.bad{border-color:var(--bad);background:var(--badb);color:var(--bad)}td.l .ans{font-size:13px;font-weight:700}td.l{min-width:56px}
+.app{display:flex;min-height:100vh}.side{width:260px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--card);border-right:1.5px solid var(--line);padding:16px 10px}
+.side h1{font-size:22px;margin:0 6px}.side .mt{font-size:17px;margin:4px 6px 12px}
+.side .gh{font-size:12px;letter-spacing:.08em;color:var(--mut);font-weight:700;margin:14px 6px 6px}
+.side button{display:block;width:100%;text-align:left;font:inherit;font-size:16px;padding:8px 10px;margin-bottom:4px;border:1.5px solid transparent;border-radius:10px;background:transparent;color:var(--ink);cursor:pointer}
+.side button:hover{background:var(--ac2)}.side button.on{background:var(--ac);color:#fff}
+.main{flex:1;min-width:0}.tabbar{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1.5px solid var(--line);padding:10px 14px;margin:0}.tabbar:empty{display:none}
+.content{max-width:780px;margin:0 auto;padding:18px 14px 60px}
+@media(max-width:760px){.app{display:block}.side{position:static;height:auto;max-height:300px;width:auto;border-right:0;border-bottom:1.5px solid var(--line)}}.lay{display:grid;grid-template-columns:230px 1fr;gap:14px;align-items:start}.mn{min-width:0}.sb button{font-size:16px}@media(max-width:700px){.lay{grid-template-columns:1fr}.sb{position:static;max-height:230px;overflow-y:auto}}
+h2{font-size:22px;margin:8px 0 2px}.mt{font-size:23px;margin:0 0 14px;color:var(--ac);line-height:1.5}
+.sb{display:grid;gap:6px;position:sticky;top:8px}.sb button{font:inherit;text-align:left;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);cursor:pointer}.sb button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.sl{font:inherit;padding:5px 8px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.wt td,.wt th{padding:4px 6px}.f.sm{width:2.6em;padding:4px 2px}.f.c{width:8em;margin-left:8px}
+.pc{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}.pc img{max-width:100%;border-radius:8px;display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.dl div{margin:2px 0}
+</style></head><body><div class="app"><aside class="side" aria-label="Danh sách bài"><h1>Trang Chinese</h1><p class="mt zh">多听，多模仿，多练习，<br>生词记得牢，开口更自信！</p><div id="sl"></div></aside>
+<div class="main"><div class="tabs tabbar" id="tt" role="tablist"></div><div class="content">
+<section id="s1" class="hide"><h2 id="h1t">LUYỆN TẬP NGHE NGỮ ÂM · BÀI 2</h2>
+<p class="sub">Từ 90 điểm trở lên: hiển thị đáp án câu sai. Dưới 90 điểm: chỉ cần làm lại những câu sai. Làm từng tab, bấm Lưu ở mỗi tab, rồi bấm Nộp bài ở cuối để tính điểm và xem đúng/sai.</p>
+<div class="name"><label for="nm">Họ và tên:</label><input id="nm" type="text" placeholder="Nhập họ tên học sinh" autocomplete="name"></div>
+<div id="ex"></div><div class="fin" style="margin:0 0 14px"><span id="sst"></span> <button class="go" id="sall" disabled>Nộp bài</button></div><div id="fin" class="fin hide"></div></section>
+<section id="s2" class="hide"><h2>BÀI TẬP</h2><div class="name"><label for="nm2">Họ và tên:</label><input id="nm2" type="text" placeholder="Nhập họ tên học sinh" autocomplete="name"></div><div id="lb"></div><div class="fin" style="margin-top:6px"><span id="bst"></span> <button class="go" id="bsub" disabled>Nộp bài</button><p class="sub" style="margin:6px 0 0">Bấm Lưu ở mỗi tab, rồi Nộp bài để tính điểm. Các phần 一, 二, 五, 六 chưa có đáp án nên giáo viên chấm tay (không tính vào điểm).</p><div id="bres"></div><div id="bm" class="msg"></div></div></section><section id="s3" class="hide"><h2>BÀI TẬP · BÀI 8</h2><p class="sub zh" style="font-size:20px">我爸爸也在医院工作</p>
+<div class="name"><label for="nm8">Họ và tên:</label><input id="nm8" type="text" placeholder="Nhập họ tên học sinh" autocomplete="name"></div>
+<div id="lb8"></div>
+<div class="fin" style="margin-top:6px"><span id="st8"></span> <button class="go" id="sub8" disabled>Nộp bài</button><p class="sub" style="margin:6px 0 0">Bấm Lưu ở mỗi tab, rồi Nộp bài để chấm điểm. Từ 85 điểm trở lên mới được Gửi kết quả (chỉ gửi một lần). Dưới 85 điểm phải làm lại những câu sai.</p><div id="res8"></div><div id="msg8" class="msg"></div></div></section>
+<section id="s4" class="hide"><h2>BÀI TẬP · BÀI 7</h2><p class="sub zh" style="font-size:20px">我晚上六点半下班</p>
+<div class="name"><label for="nm7">Họ và tên:</label><input id="nm7" type="text" placeholder="Nhập họ tên học sinh" autocomplete="name"></div>
+<div id="lb7"></div>
+<div class="fin" style="margin-top:6px"><span id="st7"></span> <button class="go" id="sub7" disabled>Nộp bài</button><p class="sub" style="margin:6px 0 0">Bấm Lưu ở mỗi tab, rồi Nộp bài để chấm điểm. Từ 85 điểm trở lên mới được Gửi kết quả (chỉ gửi một lần). Dưới 85 điểm phải làm lại những câu sai.</p><div id="res7"></div><div id="msg7" class="msg"></div></div></section>
+<div id="le" class="empty hide"></div>
+</div></div></div>
+<script>
+const AU=["assets/n2-01.mp3", "assets/n2-02.mp3", "assets/n2-03.mp3", "assets/n2-04.mp3", "assets/n2-05.mp3", "assets/n2-06.mp3"],PIC=["assets/hinh-hoc-01.jpg", "assets/hinh-hoc-02.jpg", "assets/hinh-hoc-03.jpg", "assets/hinh-hoc-04.jpg", "assets/hinh-hoc-05.jpg", "assets/hinh-hoc-06.jpg", "assets/hinh-hoc-07.jpg", "assets/hinh-hoc-08.jpg", "assets/hinh-hoc-09.jpg"],PH=["assets/hinh-bai1-01.jpg", "assets/hinh-bai1-02.jpg", "assets/hinh-bai1-03.jpg"];
+const PQ=["assets/b8-a-01.jpg", "assets/b8-a-02.jpg", "assets/b8-a-03.jpg", "assets/b8-a-04.jpg", "assets/b8-a-05.jpg", "assets/b8-a-06.jpg", "assets/b8-a-07.jpg", "assets/b8-a-08.jpg"],AX=["assets/b8-nghe-01.mp3", "assets/b8-nghe-02.mp3"];
+PQ.push(...["assets/b8-b1-01.jpg", "assets/b8-b1-02.jpg", "assets/b8-b1-03.jpg", "assets/b8-b1-04.jpg", "assets/b8-b1-05.jpg", "assets/b8-b1-06.jpg", "assets/b8-b1-07.jpg", "assets/b8-b1-08.jpg", "assets/b8-b1-09.jpg", "assets/b8-b1-10.jpg", "assets/b8-b1-11.jpg", "assets/b8-b1-12.jpg"]);
+const P=(l,a)=>({l:l.split('/'),a:a.split(',')});
+let E=[
+{k:'三',zh:'辨韵母, 画出你听到的韵母',vi:'Phân biệt vận mẫu, khoanh tròn vận mẫu mà bạn nghe được',g:'Mỗi câu có 2-3 vận mẫu để chọn. Nghe audio rồi chọn vận mẫu mà bạn nghe được.',x:'Ví dụ: “l { an / ang }”. Nghe được “lang” → chọn ang.',t:'ch',it:[['p','an ang'],['f','an en'],['g','en eng'],['t','ong ang eng'],['b','ai an ang'],['m','en ei eng'],['h','ao an ai'],['d','ou ong ang']],a:['an','en','eng','ong','ang','ei','ao','ong']},
+{k:'四',zh:'辨韵母,在你听到的音节空格处画圈',vi:'Phân biệt vận mẫu, khoanh tròn vào ô trống tương ứng với âm tiết mà bạn nghe được',g:'Mỗi hàng là một thanh mẫu. Nghe audio rồi bấm vào ô của vận mẫu mà bạn nghe được (ô sẽ có vòng tròn).',x:'Ví dụ: hàng “b”, nghe được “bang” → bấm vào ô cột ang.',t:'tb',it:['b','p','m','f','d','t','n','l','g','k','h'],a:['an','eng','ang','en','ang','ang','eng','eng','ong','an','ong']},
+{k:'二',zh:'判断下列音节与你听到的是否一致(注意声调)',vi:'Xác định các âm tiết dưới đây có giống với âm bạn nghe được hay không (chú ý thanh điệu). Nếu không đúng, hãy sửa lại.',g:'Nghe audio, so với âm tiết đề cho sẵn. Giống hoàn toàn thì chọn ✓; khác vận mẫu hoặc khác thanh điệu thì chọn × rồi gõ lại âm tiết đúng vào ô bên cạnh.',x:'Ví dụ: đề cho “bān”. Nghe được “bān” → chọn ✓. Nghe được “bán” → chọn × và gõ “bán” (hoặc ban2).',t:'tf',it:['pàn','gāng','bèn','dān','fǎng','téng','nóng','màn','fēn','děng','dǒng','kāng'],a:['0','1','0','0','0','1','0','0','1','0','0','1'],c:['pán','gāng','běn','dàn','fàng','téng','nòng','mǎn','fēn','dēng','dōng','kāng']},
+{k:'1',zh:'听后标出声调',vi:'Nghe rồi đánh dấu thanh điệu',g:'Nghe audio, chọn thanh điệu bạn nghe được: thanh 1 (ā), thanh 2 (á), thanh 3 (ǎ), thanh 4 (à).',x:'Ví dụ: đề “tan”. Nghe được “tán” → chọn thanh 2 (á).',t:'tone',it:['ban','pang','hen','hong','kan','geng','fen','lan','dong','mang','tong','neng','ben','kong','gan'],a:['1','2','3','2','4','4','1','2','4','2','1','2','3','1','4']},
+{k:'2',zh:'在横线上填出你听到的韵母及声调',vi:'Điền vận mẫu và thanh điệu nghe được vào chỗ trống.',g:'Gõ vận mẫu kèm thanh điệu. Có thể gõ số thanh điệu ngay sau vận mẫu, trang sẽ tự đổi thành dấu: ao3 → ǎo.',x:'Ví dụ: “nǐ h___”. Nghe được “nǐ hǎo” → gõ ao3 (hiện ǎo).',t:'fill',it:[P('bù t{}','óng'),P('f{} fǎ','āng'),P('hǎok{}','àn'),P('f{} fù','ēng'),P('hēib{}','ǎn'),P('g{} bǐ','āng'),P('kèb{}','ěn'),P('g{} mào','ǎn'),P('g{} yù','ōng'),P('tàiy{}','áng'),P('láod{}','òng'),P('kěn{}','éng'),P('H{} yǔ','àn'),P('b{} g{}','àn,ōng'),P('h{} d{}','óng,ēng'),P('b{} m{}','āng,áng'),P('n{} f{}','án,āng')]},
+{k:'3',zh:'在横线上填出你听到的音节',vi:'Điền âm tiết nghe được vào chỗ trống',g:'Nghe đoạn audio, điền cả thanh mẫu + vận mẫu + thanh điệu. Có thể gõ số thanh: nan2 → nán.',x:'Ví dụ: “A: Nǐ ___ ma?”. Nghe được “Nǐ máng ma?” → gõ “máng” hoặc “mang2”.',t:'fill',it:[P('Tā de yīfu hěn hǎo{}.','kàn'),P('A: Hànyǔ {} ma?/B: {}.','nán,bù nán'),P('A: Kāfēi li {} táng ma?/B: {}.','fàng,bú fàng'),P('A: {}yì hǎo le ma?/B: Hái {} ne.','fān,méi'),P('A: Dàifu, wǒ hěn lěng, hái tóu{}./B: Kě{} gǎnmào le.','téng,néng'),P('A: Nǐmen kàn {}bǎn, …… {} le ma?/B: {} le.','hēi,dǒng,dǒng')]}
+];
+
+const E1=[
+{k:'三',zh:'辨声母，画出你听到的声母',vi:'Phân biệt thanh mẫu, gạch chân thanh mẫu bạn nghe được',g:'Mỗi dòng có hai âm tiết chỉ khác nhau ở thanh mẫu. Nghe ghi âm rồi chọn âm tiết bạn nghe được.',x:'Ví dụ: “ga — ka”. Nghe được “ka” → chọn ka.',t:'ch',grid:1,it:[['ge','ke'],['gu','ku'],['gai','kai'],['gao','kao'],['gou','kou'],['ma','fa'],['mei','fei'],['mu','fu'],['mou','fou'],['mo','fo'],['da','ta'],['dao','tao'],['dai','tai'],['dou','tou'],['de','te'],['ba','pa'],['bao','pao'],['bai','pai'],['bei','pei'],['bu','pu'],['bi','pi'],['na','la'],['ne','le'],['nu','lu'],['nai','lai'],['nei','lei'],['nao','lao'],['ni','li'],['ka','ha'],['ke','he'],['kai','hai'],['kei','hei'],['kao','hao'],['kou','hou']].map(p=>['',p.join(' ')]),a:['ge','ku','kai','gao','gou','ma','mei','fu','fou','mo','da','dao','tai','tou','de','pa','bao','pai','bei','bu','pi','la','ne','lu','lai','nei','lao','ni','ka','ke','hai','hei','hao','hou']},
+{k:'四',zh:'辨韵母，画出你听到的韵母',vi:'Phân biệt vận mẫu, chọn vận mẫu bạn nghe được',g:'Mỗi câu cho một thanh mẫu và 2–3 vận mẫu để chọn. Nghe ghi âm rồi chọn vận mẫu bạn nghe được.',x:'Ví dụ: “d { a / ai }”. Nghe được “dai” → chọn ai.',t:'ch',it:[['b','a ao u'],['p','ao a o'],['m','o a u'],['l','i u ü'],['n','u i ü'],['g','e ei'],['g','u ou'],['k','a ai ao']],a:['ao','a','u','i','u','ei','ou','ao']},
+{k:'二',zh:'辨声调，在你听到的音节空格处画圈',vi:'Phân biệt thanh điệu, khoanh tròn vào ô trống tương ứng với thanh điệu mà bạn nghe được',g:'Mỗi hàng là một âm tiết. Nghe ghi âm rồi bấm vào ô của thanh điệu bạn nghe được (ô sẽ có vòng tròn). Các cột lần lượt là thanh 1 (ˉ), thanh 2 (ˊ), thanh 3 (ˇ), thanh 4 (ˋ).',x:'Ví dụ: hàng “ma”, nghe được “má” → bấm vào cột thanh 2 (ˊ).',t:'tb',cols:['1','2','3','4'],cl:['ˉ','ˊ','ˇ','ˋ'],it:['bao','mei','yu','lai','nai','fu','gei','tou','hai','fei'],a:['1','2','3','2','3','4','3','2','2','1']},
+{k:'1',zh:'听后标出声调',vi:'Nghe rồi đánh dấu thanh điệu',g:'Nghe ghi âm, chọn thanh điệu bạn nghe được cho từng âm tiết. Với từ hai âm tiết, chọn thanh điệu cho từng âm tiết.',x:'Ví dụ: đề “tan”. Nghe được “tán” → chọn Thanh 2.',t:'tone',
+ it:['pa','mai','bao','hai','he','fa','nü','te','fei','dou','lei','kao','gu','yi','yu','hou','dagai · da','dagai · gai','maoyi · mao','maoyi · yi','fuwu · fu','fuwu · wu','tiyu · ti','tiyu · yu','tigao · ti','tigao · gao','nuli · nu','nuli · li','likai · li','likai · kai','heibai · hei','heibai · bai','malu · ma','malu · lu','baimi · bai','baimi · mi','aihao · ai','aihao · hao'],
+ sy:['pa','mai','bao','hai','he','fa','nü','te','fei','dou','lei','kao','gu','yi','yu','hou','da','gai','mao','yi','fu','wu','ti','yu','ti','gao','nu','li','li','kai','hei','bai','ma','lu','bai','mi','ai','hao'],
+ a:['4','4','1','3','1','3','3','4','1','1','4','3','1','4','2','4','4','4','2','1','2','4','3','4','2','1','3','4','2','1','1','2','3','4','2|3','3','4','3']},
+{k:'2',zh:'在横线上填出你听到的音节',vi:'Điền âm tiết bạn nghe được vào chỗ trống',g:'Nghe ghi âm rồi điền âm tiết (kèm thanh điệu) vào chỗ trống. Có thể gõ số thanh: da3 → dǎ.',x:'Ví dụ: “Māma ___ dìdi.”. Nghe được “Māma ài dìdi” → gõ “ài” hoặc “ai4”.',t:'fill',it:[P('Gēge {} dìdi, dìdi kū.','dǎ'),P('Bàba {} māma, māma {} bàba.','pà,bú pà'),P('Māma hē {}, gēge hē {}.','kāfēi,kělè'),P('Tā ài dǎ {}, Màikè ài {}.','máoyī,pǎobù'),P('Nǐ mǎi {}, tā mǎi {}, Mǎlì mǎi {}.','lí,yú,dàmǐ'),P('Gēge bǐ dìdi {}, dìdi bǐ gēge {}.','gāo,ǎi')]}
+];
+const AU1=["assets/n1-01.mp3", "assets/n1-02.mp3", "assets/n1-03.mp3", "assets/n1-04.mp3", "assets/n1-05.mp3"];
+let AUc=AU;
+const M={a:'āáǎà',e:'ēéěè',i:'īíǐì',o:'ōóǒò',u:'ūúǔù',ü:'ǖǘǚǜ'};
+function mark(w,t){w=w.replace(/v/g,'ü');let i=w.search(/[ae]/);if(i<0&&w.includes('ou'))i=w.indexOf('o');
+ if(i<0)for(let k=w.length-1;k>=0;k--)if(M[w[k]]){i=k;break}
+ return i<0||t>4?w:w.slice(0,i)+M[w[i]][t-1]+w.slice(i+1)}
+const conv=s=>s.replace(/([a-zA-Züv]+)([1-5])/g,(x,w,t)=>mark(w.toLowerCase(),+t));
+const norm=s=>conv(s).toLowerCase().replace(/\s+/g,'').normalize('NFC');
+const $=s=>document.querySelector(s);
+let S,att=1,t0=0,dl=null,log=[];
+try{log=JSON.parse(localStorage.getItem('nguam-log')||'[]')}catch(e){}
+const pts=x=>x.t=='fill'?x.it.reduce((n,i)=>n+i.a.length,0):x.it.length;
+let TOTAL=E.reduce((n,x)=>n+pts(x),0);
+
+function html(x,k){let h='';
+ x.it.forEach((it,i)=>{const id=`i${k}_${i}`;let b='';
+  if(x.t=='tf')b=`<span class="syl">${i+1}. ${it}</span>`+['1|✓','0|×'].map(v=>`<button class="o" data-k="${k}" data-i="${i}" data-v="${v[0]}">${v[2]}</button>`).join('')+`<input type="text" class="f c" data-k="${k}" data-i="${i}" data-b="c" placeholder="Sửa lại nếu sai" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Sửa lại câu ${i+1}">`;
+  else if(x.t=='ch')b=`<span class="syl">${i+1}. ${it[0]}</span>`+it[1].split(' ').map(v=>`<button class="o" data-k="${k}" data-i="${i}" data-v="${v}">${v}</button>`).join('');
+  else if(x.t=='tone')b=`<span class="syl">(${i+1}) ${it}</span><select class="sl" data-k="${k}" data-i="${i}" aria-label="Thanh điệu câu ${i+1}"><option value="">Thanh điệu</option>`+[1,2,3,4].map(v=>`<option value="${v}">Thanh ${v}</option>`).join('')+'</select>';
+  else if(x.t=='fill'){let n=-1;b=it.l.map(l=>`<div class="ln">${i==0||it.l.length>0&&l==it.l[0]?`(${i+1}) `:''}`+l.replace(/\{\}/g,()=>`<input type="text" class="f" data-k="${k}" data-i="${i}" data-b="${++n}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Chỗ trống ${n+1}">`)+'</div>').join('')}
+  if(x.t=='tb')return;
+  h+=`<div class="it" id="${id}">${b}<span class="ans"></span></div>`});
+ if(x.t=='tb'){const c=x.cols||['an','en','ang','eng','ong'],LB=x.cl||c;h=`<table><tr><th></th>${LB.map(v=>`<th>${v}</th>`).join('')}</tr>`+x.it.map((r,i)=>`<tr id="i${k}_${i}"><td class="l">${i+1}. ${r}<span class="ans"></span></td>${c.map(v=>`<td><button class="o" data-k="${k}" data-i="${i}" data-v="${v}" aria-label="${r} ${v}">○</button></td>`).join('')}</tr>`).join('')+'</table>';h+=''}
+ else if(x.t!='fill')h=`<div class="${x.t=='tf'||x.t=='tone'||x.grid?'grid':''}">${h}</div>`;
+ return h}
+
+function render(){
+ S=E.map(()=>({v:[],c:[],d:0,r:[]}));t0=0;
+ $('#ex').innerHTML=E.map((x,k)=>`<div class="ex" id="e${k}"><div class="hd"><div class="chip zh">${x.k}</div><div><div class="zh">${x.zh}</div><div class="vi">${x.vi}</div></div></div>
+ <div class="guide"><b>Hướng dẫn:</b> ${x.g}<br><i>${x.x}</i></div>
+ <audio controls preload="metadata" src="${AUc[k]}"></audio>
+ <div class="body">${html(x,k)}</div>
+ <button class="go" data-go="${k}">Lưu</button> <button class="go ghost" data-ed="${k}" disabled>Sửa bài</button><span class="rs" id="r${k}"></span></div>`).join('');
+ $('#fin').classList.add('hide');$('#fin').innerHTML='';gpShow(gpI);subm=false;$('#sall').textContent='Nộp bài';bar()}
+
+function grade(k){const x=E[k],s=S[k];
+ return x.it.map((it,i)=>{const v=s.v[i];
+  return x.t=='fill'?it.a.map((a,b)=>norm((v||[])[b]||'')==norm(a)):[String(x.a[i]).split('|').includes(v)&&(x.t!='tf'||v=='1'||norm(s.c[i]||'')==norm(x.c[i]))]})}
+const ansTxt=(x,i)=>x.t=='fill'?x.it[i].a.join(' ; '):x.t=='tf'?(x.a[i]=='1'?'✓':'× – nghe đúng là: '+x.c[i]):x.t=='tone'?String(x.a[i]).split('|').map(q=>mark(x.sy?x.sy[i]:x.it[i],+q)).join(' / '):x.t=='tb'&&x.cl?'Thanh '+x.a[i]:x.a[i];
+
+let subm=false;
+function bar(){const n=S.filter(z=>z.d).length;$('#sst').textContent=`Đã lưu ${n}/${S.length}`;$('#sall').disabled=n<S.length||subm}
+function save(k){if(subm||S[k].d)return;S[k].d=1;const g=$(`[data-go="${k}"]`),bd=$(`#e${k} .body`);g.textContent='Đã lưu ✓';g.disabled=true;$(`[data-ed="${k}"]`).disabled=false;bd.inert=true;bd.style.opacity='.7';bar()}
+function edit(k){if(subm||!S[k].d)return;S[k].d=0;const g=$(`[data-go="${k}"]`),bd=$(`#e${k} .body`);g.textContent='Lưu';g.disabled=false;$(`[data-ed="${k}"]`).disabled=true;bd.inert=false;bd.style.opacity='';bar()}
+function dirty(k){const s=S[k];if(!s||!s.d)return;s.d=0;const g=$(`[data-go="${k}"]`);g.textContent='Lưu';g.disabled=false;bar()}
+function submitAll(){
+ const nm=$('#nm').value.trim();
+ if(!nm){$('#nm').focus();$('#nm').placeholder='Cần nhập họ tên trước khi nộp bài';$('#nm').style.borderColor='var(--bad)';return}
+ subm=true;
+ E.forEach((x,k)=>{const s=S[k],r=grade(k);s.r=r;
+  r.forEach((a,i)=>{const el=$(`#i${k}_${i}`);el.classList.remove('ok','bad');el.classList.add(a.every(Boolean)?'ok':'bad','lock');
+   el.querySelectorAll('.f').forEach((f,b)=>{f.readOnly=true;if(x.t=='fill')f.classList.add(a[b]?'ok':'bad')});
+   el.querySelectorAll('select').forEach(z=>z.disabled=true)});
+  $(`#r${k}`).textContent=`Đúng ${r.flat().filter(Boolean).length}/${pts(x)} câu`;$(`[data-go="${k}"]`).disabled=true;$(`[data-ed="${k}"]`).disabled=true});
+ bar();finish(nm)}
+
+function retryWrong(){att++;
+ E.forEach((x,k)=>{const s=S[k];let any=0;
+  s.r.forEach((a,i)=>{if(a.every(Boolean))return;any=1;const el=$(`#i${k}_${i}`);el.classList.remove('ok','bad','lock');
+   el.querySelectorAll('.o').forEach(b=>{b.classList.remove('on');if(x.t=='tb')b.textContent='○'});
+   if(x.t=='tf'){s.v[i]=undefined;s.c[i]='';const f=el.querySelector('.f');f.value='';f.readOnly=false}
+   else if(x.t=='fill')el.querySelectorAll('.f').forEach((f,b)=>{if(!a[b]){f.value='';f.readOnly=false;f.classList.remove('bad');(s.v[i]||[])[b]=''}});
+   else if(x.t=='tone'){s.v[i]=undefined;const z=el.querySelector('select');z.value='';z.disabled=false}
+   else s.v[i]=undefined;el.querySelector('.ans').textContent=''});
+  if(any){s.d=0;const bd=$(`#e${k} .body`);bd.inert=false;bd.style.opacity='';const g=$(`[data-go="${k}"]`);g.disabled=false;g.textContent='Lưu';$(`[data-ed="${k}"]`).disabled=true;$(`#r${k}`).textContent=''}});
+ subm=false;$('#sall').textContent='Nộp lại';bar();
+ const nk=S.findIndex(z=>!z.d);if(nk>=0&&tt.children[nk])tt.children[nk].click();
+ $('#fin').classList.add('hide');scrollTo({top:0,behavior:'smooth'})}
+
+function finish(nm){
+ const sc=S.map(s=>s.r.flat().filter(Boolean).length),sum=sc.reduce((a,b)=>a+b,0),tot=Math.round(sum*100/TOTAL),ok=tot>=90;
+ const sec=t0?Math.round((Date.now()-t0)/1000):0;
+ const rec={n:nm,l:curNum,att,at:new Date().toLocaleString('vi-VN'),sec,sc,tot};
+ log.push(rec);try{localStorage.setItem('nguam-log',JSON.stringify(log))}catch(e){}
+ if(ok)E.forEach((x,k)=>S[k].r.forEach((a,i)=>{if(!a.every(Boolean))$(`#i${k}_${i} .ans`).textContent='Đáp án: '+ansTxt(x,i)}));
+ const f=$('#fin');f.classList.remove('hide');
+ f.innerHTML=`<div class="big ${ok?'pass':'fail'}">${tot}<span style="font-size:20px"> / 100</span></div>
+ <p><b>${ok?'Đạt.':'Chưa đạt.'}</b> ${ok?'Đáp án của những câu làm sai đã hiện ngay dưới từng câu.':'Dưới 90 điểm nên chưa hiện đáp án. Hãy nghe lại và chỉ làm lại những câu màu đỏ.'}</p>
+ <p>Lần làm: ${att} · Thời gian: ${Math.floor(sec/60)} phút ${sec%60} giây</p>
+ <button class="go" id="redo">${ok?'Làm lại từ đầu':'Làm lại những câu sai'}</button> <button class="go hide" id="csv">Tải bảng điểm (CSV)</button><div id="cm" class="msg"></div>`;
+ $('#redo').onclick=ok?()=>{att++;render();scrollTo({top:0,behavior:'smooth'})}:retryWrong;
+ if(dl)$('#csv').classList.remove('hide');
+ $('#csv').onclick=exp;
+ f.scrollIntoView({behavior:'smooth',block:'center'})}
+
+async function exp(){
+ const H=['Họ tên','Bài','Lần làm','Thời điểm','Thời gian (giây)',...E.map(x=>`Dạng ${x.k} (/${pts(x)})`),'Tổng điểm (/100)','Kết quả'];
+ const q=v=>`"${String(v).replace(/"/g,'""')}"`;
+ const rows=log.filter(r=>(r.l||2)==curNum).map(r=>[r.n,'Nghe ngữ âm – Bài '+curNum,r.att,r.at,r.sec,...r.sc,r.tot,r.tot>=90?'Đạt':'Chưa đạt']);
+ const csv='\ufeff'+[H,...rows].map(r=>r.map(q).join(',')).join('\r\n');
+ try{await dl.save({filename:`diem-nghe-ngu-am-bai-${curNum}.csv`,data:csv});$('#cm').textContent=''}
+ catch(e){$('#cm').textContent=e&&e.code=='declined'?'':'Chưa tải được bảng điểm. Hãy thử lại.'}}
+
+document.addEventListener('click',e=>{
+ const o=e.target.closest('.o'),g=e.target.closest('[data-go]'),ed=e.target.closest('[data-ed]');
+ if(o){const k=+o.dataset.k,i=+o.dataset.i;if(o.closest('.lock'))return;dirty(k);if(!t0)t0=Date.now();
+  S[k].v[i]=o.dataset.v;
+  o.closest(E[k].t=='tb'?'tr':'.it').querySelectorAll('.o').forEach(b=>b.classList.toggle('on',b===o));
+  if(E[k].t=='tb')o.closest('tr').querySelectorAll('.o').forEach(b=>b.textContent=b===o?'●':'○')}
+ else if(g)save(+g.dataset.go);else if(ed)edit(+ed.dataset.ed)});
+document.addEventListener('change',e=>{const z=e.target;if(z.classList.contains('sl')&&z.dataset.k!==undefined){if(!t0)t0=Date.now();dirty(+z.dataset.k);S[+z.dataset.k].v[+z.dataset.i]=z.value}});
+document.addEventListener('input',e=>{const f=e.target;if(!f.classList.contains('f')||f.dataset.k===undefined)return;
+ const k=+f.dataset.k,i=+f.dataset.i;dirty(k);if(!t0)t0=Date.now();
+ if(/[1-5]/.test(f.value))f.value=conv(f.value);
+ if(f.dataset.b=='c')S[k].c[i]=f.value;else(S[k].v[i]=S[k].v[i]||[])[+f.dataset.b]=f.value});
+
+const LN=['AI 小雨，你好','我叫李文','我是中国人','我有两个孩子','今天我休息','你的手机号是多少？','我晚上六点半下班','我爸爸也在医院工作','我明天上午在学校学习','这儿的苹果真便宜！','我读大学呢','昨天下雪了','请给我一杯茶','我看了一个电影','大兴机场见！'];
+const zh=s=>s.replace(/[\u4e00-\u9fff，？！]+/g,m=>`<span class="zh">${m}</span>`);
+const sl=(o,a)=>`<select class="sl"${a?` data-a="${a}"`:''}><option value="">Chọn</option>${o.map(v=>`<option>${v}</option>`).join('')}</select>`;
+const card=(n,z,v,b)=>`<div class="ex"><div class="hd"><div class="chip zh">${n}</div><div><div class="zh">${z}</div><div class="vi">${v}</div></div></div><div class="body" style="margin-top:12px">${b}</div></div>`;
+const inp=w=>`<input type="text" class="f" style="width:${w}" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+function W1(){
+ const Q=[['你好','nǐ hǎo|níhǎo|nǐ hào|nǐhǎo'],['老师','lǎosī|láo shī|lǎoshī|lào shī'],['谢谢','xièxie|xiě xie|xièxiē|xiēxie'],['不客气','bú kèqì|bù kèqì|bù kēqì|bú kēqì'],['同学','tóngxué|tóng xüé|tòng xué|tóngxúe'],['再见','zàijien|zài Jian|zàijiàn|zài jiàn']];
+ const a=card('一','选择正确的注音法','Chọn cách ghi phiên âm đúng','<div class="grid">'+Q.map((q,i)=>`<div class="it"><b>${i+1}. <span class="zh">${q[0]}</span></b>${q[1].split('|').map((o,j)=>`<div>${'ABCD'[j]}. ${o}</div>`).join('')}${sl(['A','B','C','D'])}</div>`).join('')+'</div>');
+ const b=card('一','说出部首的名字或汉字的汉越读音以及笔画数量','Nêu tên các bộ hoặc âm Hán Việt của chữ Hán và số nét của chúng','<table class="wt"><tr><th></th><th>Tên</th><th>Số nét</th></tr>'+[...'不子大心小女门'].map(c=>`<tr><td class="zh" style="font-size:26px;text-align:center">${c}</td><td>${inp('100%')}</td><td>${inp('4em')}</td></tr>`).join('')+'</table>');
+ const L=['王老师','您好','谢谢你','同学','学生','大家好'],R=['Chào ông/bà','Chào mọi người','Học sinh','Cô Vương','Bạn học','Cảm ơn bạn'];
+ const c=card('三','阅读连线','Đọc và nối (chọn chữ cái tương ứng)','<div class="two"><div>'+L.map((s,i)=>`<div class="it">${i+1}. <span class="zh" style="font-size:22px">${s}</span> ${sl([...'ABCDEF'],'DAFECB'[i])}</div>`).join('')+'</div><div>'+R.map((s,i)=>`<div class="it">${'ABCDEF'[i]}. ${s}</div>`).join('')+'</div></div>');
+ const D=[['你好。',0],[0,'你好。'],[0,'王老师好。'],['谢谢。',0],['再见。',0],[0,'你好。'],[0,'老师好。'],[0,'你好。'],['大家好。',0]];
+ const e=card('四','看图完成会话','Nhìn hình hoàn thành hội thoại','<div class="pc">'+D.map((p,i)=>`<div class="it"><img src="${PIC[i]}" alt="Hình ${i+1}"><div class="zh">A：${p[0]||inp('7em')}</div><div class="zh">B：${p[1]||inp('7em')}</div></div>`).join('')+'</div>');
+ const T=[['A：你好！','B：你好！'],['A：你好！','B：你们好！'],['A：谢谢！','B：不客气！']];
+ const f=card('五','看图话，选择正确的对话','Nhìn hình, chọn hội thoại thù hợp (chọn số hội thoại cho từng hình)','<div class="pc">'+PH.map((u,i)=>`<div class="it"><img src="${u}" alt="Hình ${i+1}"><div>Hình ${i+1}: ${sl(['1','2','3'])}</div></div>`).join('')+'</div><div class="dl zh" style="margin-top:10px;font-size:20px">'+T.map((p,i)=>`<div><b>${i+1}.</b> ${p[0]}　${p[1]}</div>`).join('')+'</div>');
+ const Z=s=>`<b class="zh" style="font-size:22px">${s}</b>`,Y=s=>`<span class="zh" style="font-size:20px">${s}</span>`;
+ const QS=a=>'<div>'+a.map((q,i)=>`<div class="it">${i+1}. ${q[0]} ${sl(q[1],q[2])}${q[3]||''}</div>`).join('')+'</div>';
+ const M1=['xin chào','tạm biệt','cảm ơn','mọi người'],M2=['thầy giáo, cô giáo','học sinh, sinh viên','bạn học','đừng khách sáo'],M3=['ngài, ông, bà (trang trọng)','các bạn','mọi người','tạm biệt'],TF=['Đúng','Sai'];
+ const g7=card('三','选择正确的意思','Chọn nghĩa tiếng Việt đúng',QS([[Z('你好'),M1,'xin chào'],[Z('谢谢'),M1,'cảm ơn'],[Z('再见'),M1,'tạm biệt'],[Z('大家'),M1,'mọi người'],[Z('老师'),M2,'thầy giáo, cô giáo'],[Z('学生'),M2,'học sinh, sinh viên'],[Z('同学'),M2,'bạn học'],[Z('不客气'),M2,'đừng khách sáo'],[Z('您'),M3,'ngài, ông, bà (trang trọng)'],[Z('你们'),M3,'các bạn']]));
+ const g8=card('二','选择正确的拼音','Chọn phiên âm đúng',QS([[Z('谢谢'),['xièxie','xiéxie','xièxiè','xiěxie'],'xièxie'],[Z('同学'),['tóngxué','tòngxué','tóngxuě','tōngxué'],'tóngxué'],[Z('再见'),['zàijiàn','zǎijiàn','zàijiān','zāijiàn'],'zàijiàn'],[Z('老师'),['lǎoshī','láoshī','lǎoshì','lāoshī'],'lǎoshī'],[Z('大家'),['dàjiā','dǎjiā','dàjiá','dājiā'],'dàjiā'],[Z('学生'),['xuéshēng','xuěshēng','xuéshěng','xuēshēng'],'xuéshēng'],[Z('您'),['nín','nǐn','nīn','nìn'],'nín'],[Z('不客气'),['bú kèqi','bù kèqi','bú kēqi','bú kèqì'],'bú kèqi'],[Z('你们'),['nǐmen','nímen','nǐmén','nìmen'],'nǐmen']]));
+ const g9=card('六','选择合适的词语完成对话','Chọn từ thích hợp để hoàn thành hội thoại',QS([[Y('A：你好！　B：'),['你好','再见','不客气'],'你好',Y('！')],[Y('A：谢谢！　B：'),['不客气','你好','再见'],'不客气',Y('！')],[Y('王一飞：同学们，'),['再见','谢谢','您好'],'再见',Y('！')],[Y('学生们：老师，'),['您','们','我'],'您',Y('好！')],[Y('小语：你'),['们','您','家'],'们',Y('好！')],[Y('王一飞：'),['大家','学生','老师'],'大家',Y('好！')],[Y('学生们：'),['老师','同学','大家'],'老师',Y('，再见！')]]));
+ const g10=card('七','判断对错','Đúng hay sai (chọn Đúng / Sai)',QS([['“您” là cách xưng hô trang trọng, dùng với người lớn tuổi hoặc người mình kính trọng.',TF,'Đúng'],['“不客气” dùng để chào tạm biệt.',TF,'Sai'],['“你们” là đại từ nhân xưng ngôi thứ hai số nhiều.',TF,'Đúng'],['“们” đứng sau đại từ nhân xưng hoặc danh từ để chỉ số nhiều.',TF,'Đúng'],['“大家好” nghĩa là “Chào mọi người”.',TF,'Đúng'],['“再见” nghĩa là “cảm ơn”.',TF,'Sai'],['Muốn chào cô giáo một cách lịch sự, ta nói “老师，您好！”.',TF,'Đúng']]));
+ const g11=card('十一','阅读对话，回答问题','Đọc các bài khoá của Bài 1 và chọn đáp án đúng',QS([['Ở Bài khoá 1, Vương Nhất Phi chào ai?',['AI Tiểu Ngữ','Học sinh','Cô Vương'],'AI Tiểu Ngữ'],['Ở Bài khoá 1, Tiểu Ngữ chào Vương Nhất Phi bằng câu nào?',['王老师，你好！','老师，您好！','大家好！'],'王老师，你好！'],['Ở Bài khoá 2, học sinh chào cô giáo bằng câu nào?',['老师，您好！','你们好！','再见！'],'老师，您好！'],['Ở Bài khoá 2, Tiểu Ngữ chào các học sinh bằng câu nào?',['你们好！','老师，您好！','谢谢！'],'你们好！'],['Ở Bài khoá 3, học sinh nói gì với Tiểu Ngữ?',['谢谢！','不客气！','你好！'],'谢谢！'],['Ở Bài khoá 3, Vương Nhất Phi nói gì khi tạm biệt học sinh?',['同学们，再见！','老师，再见！','大家好！'],'同学们，再见！']]));
+ const V1=['mẹ','ngựa','cây gai'],V2=['ăn','mắng','trồng'];
+ const g12=card('十二','绕口令','Bài vè luyện phát âm (跟读绕口令)','<div class="guide"><div class="zh" style="font-size:22px">妈种麻，我放马。<br>马吃麻，妈骂马。</div><div>Mā zhòng má, wǒ fàng mǎ. Mǎ chī má, mā mà mǎ.</div><div class="vi">Mẹ trồng cây gai, tôi thả ngựa. Ngựa ăn cây gai, mẹ mắng ngựa.</div></div>'+QS([[Z('妈')+' nghĩa là',V1,'mẹ'],[Z('马')+' nghĩa là',V1,'ngựa'],[Z('麻')+' nghĩa là',V1,'cây gai'],[Z('吃')+' nghĩa là',V2,'ăn'],[Z('骂')+' nghĩa là',V2,'mắng'],[Z('种')+' nghĩa là',V2,'trồng'],['Phiên âm của '+Z('放'),['fàng','fāng','fǎng','fáng'],'fàng'],['Phiên âm của '+Z('种'),['zhòng','zhǒng','zhōng','zhóng'],'zhòng']]));
+ return [['一 Bộ & số nét',b],['二 Phiên âm đúng',g8],['三 Nghĩa của từ',g7],['四 Hội thoại',e],['五 Chọn hội thoại',f],['六 Hoàn thành hội thoại',g9],['七 Đúng / Sai',g10]].map(x=>[x[0],x[1]+'<button class="go bsv">Lưu</button> <button class="go ghost bed" disabled>Sửa bài</button>'])}
+const side=$('#sl'),tt=$('#tt');let built=0,gpI=0,WL=[];
+let GL=['三 Vận mẫu','四 Khoanh ô','二 Đúng / sai','1 Thanh điệu','2 Điền vận mẫu','3 Điền âm tiết'];
+
+const NL={n2:{E:E,AU:AU,GL:GL,title:'LUYỆN TẬP NGHE NGỮ ÂM · BÀI 2',num:2},n1:{E:E1,AU:AU1,GL:['三 Thanh mẫu','四 Vận mẫu','二 Phân biệt thanh điệu','1 Đánh dấu thanh điệu','2 Điền âm tiết'],title:'LUYỆN TẬP NGHE NGỮ ÂM · BÀI 1',num:1}};
+let curNum=2,curN=null;const NS={};
+function useN(key){
+ if(curN===key)return;
+ if(curN){const ex=document.createDocumentFragment(),fin=document.createDocumentFragment();
+  while($('#ex').firstChild)ex.appendChild($('#ex').firstChild);while($('#fin').firstChild)fin.appendChild($('#fin').firstChild);
+  NS[curN]={S,att,t0,subm,gpI,ex,fin,fh:$('#fin').classList.contains('hide'),nm:$('#nm').value,sall:$('#sall').textContent}}
+ curN=key;const L=NL[key];E=L.E;AUc=L.AU;GL=L.GL;curNum=L.num;TOTAL=E.reduce((n,x)=>n+pts(x),0);$('#h1t').textContent=L.title;
+ const c=NS[key];
+ if(c){S=c.S;att=c.att;t0=c.t0;subm=c.subm;gpI=c.gpI;$('#ex').appendChild(c.ex);$('#fin').appendChild(c.fin);$('#fin').classList.toggle('hide',c.fh);$('#nm').value=c.nm;$('#sall').textContent=c.sall;bar()}
+ else{att=1;gpI=0;$('#nm').value='';render()}}
+const tl=s=>s.slice(s.indexOf(' ')+1);
+function gpShow(i){gpI=i;document.querySelectorAll('#ex>.ex').forEach((z,y)=>z.classList.toggle('hide',y!=i))}
+function setTabs(L,f){tt.innerHTML='';L.forEach((l,i)=>{const x=document.createElement('button');x.setAttribute('role','tab');x.innerHTML=l;
+ x.onclick=()=>{[...tt.children].forEach((z,y)=>{z.classList.toggle('on',y==i);z.setAttribute('aria-selected',y==i)});f(i)};tt.appendChild(x)});
+ if(tt.firstChild)tt.firstChild.click()}
+function go(m){tg(m[0],true);
+ side.querySelectorAll('button').forEach(z=>z.classList.toggle('on',z.dataset.m===m));
+ ['s1','s2','s3','s4','le'].forEach(s=>$('#'+s).classList.add('hide'));
+ const k=+m.slice(1),mt=(m[0]=='n'?'Luyện tập nghe ngữ âm':'Bài tập')+' · Bài '+k;
+ if(m=='n1'||m=='n2'){useN(m);$('#s1').classList.remove('hide');return setTabs(GL.map(tl),gpShow)}
+ if(m=='b7'){$('#s4').classList.remove('hide');if(!b7.built)buildB7();return setTabs(['Tìm hiểu thêm','Ngữ âm','Phần Nghe','Phần Đọc'],i=>$('#lb7').querySelectorAll('.tk').forEach((z,y)=>z.classList.toggle('hide',y!=i)))}
+ if(m=='b8'){$('#s3').classList.remove('hide');if(!b8.built)buildB8();return setTabs(['Tìm hiểu thêm','Ngữ âm','Phần Nghe','Phần Đọc'],i=>$('#lb8').querySelectorAll('.tk').forEach((z,y)=>z.classList.toggle('hide',y!=i)))}
+ if(m=='b1'){$('#s2').classList.remove('hide');
+  if(!built){built=1;WL=W1();bsaved=WL.map(()=>false);setTimeout(bBar,0);$('#lb').innerHTML=WL.map((w,i)=>`<div class="tk${i?' hide':''}">${w[1]}</div>`).join('')}
+  return setTabs(WL.map(w=>tl(w[0])),i=>$('#lb').querySelectorAll('.tk').forEach((z,y)=>z.classList.toggle('hide',y!=i)))}
+ tt.innerHTML='';const e=$('#le');e.textContent=mt+': nội dung đang được cập nhật.';e.classList.remove('hide')}
+side.innerHTML='<button class="gbtn" data-g="n">LUYỆN TẬP NGHE NGỮ ÂM ▸</button><div id="gn" class="hide">'+[...Array(10)].map((_,j)=>`<button data-m="n${j+1}">Bài ${j+1}</button>`).join('')+'</div><button class="gbtn" data-g="b">BÀI TẬP ▸</button><div id="gb" class="hide">'+LN.map((n,j)=>`<button data-m="b${j+1}">Bài ${j+1}: ${zh(n)}</button>`).join('')+'</div>';
+function tg(g,open){const d=$('#g'+g),b=side.querySelector(`[data-g="${g}"]`),o=open===undefined?d.classList.contains('hide'):open;d.classList.toggle('hide',!o);b.textContent=b.textContent.slice(0,-1)+(o?'▾':'▸');if(o){const h=g=='n'?'b':'n',hb=side.querySelector(`[data-g="${h}"]`);$('#g'+h).classList.add('hide');hb.textContent=hb.textContent.slice(0,-1)+'▸'}}
+side.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.g)tg(b.dataset.g);else go(b.dataset.m)};
+let bl=[],bsaved=[],bsb=false,bat=1;try{bl=JSON.parse(localStorage.getItem('bt-log')||'[]')}catch(e){}
+const csvOf=(H,R)=>'\ufeff'+[H,...R].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+function bBar(){const n=bsaved.filter(Boolean).length;$('#bst').textContent=`Đã lưu ${n}/${bsaved.length}`;$('#bsub').disabled=!bsaved.length||n<bsaved.length||bsb}
+$('#lb').addEventListener('click',e=>{const b=e.target.closest('.bsv,.bed');if(!b||bsb)return;const tk=b.closest('.tk'),i=[...$('#lb').children].indexOf(tk),sv=tk.querySelector('.bsv'),ed=tk.querySelector('.bed');
+ if(b.classList.contains('bsv')){if(bsaved[i])return;bsaved[i]=true;tk.querySelectorAll('select,input').forEach(z=>z.disabled=true);sv.textContent='Đã lưu ✓';sv.disabled=true;ed.disabled=false}
+ else{if(!bsaved[i])return;bsaved[i]=false;tk.querySelectorAll('select,input').forEach(z=>{if(!z.classList.contains('ok'))z.disabled=false});sv.textContent='Lưu';sv.disabled=false;ed.disabled=true}
+ bBar()});
+['input','change'].forEach(ev=>$('#lb').addEventListener(ev,e=>{const tk=e.target.closest('.tk');if(!tk)return;const i=[...$('#lb').children].indexOf(tk);if(bsaved[i]){bsaved[i]=false;const b=tk.querySelector('.bsv');b.textContent='Lưu';b.disabled=false;bBar()}}));
+async function expB(){const m=$('#bm');
+ if(!dl){m.textContent='Chưa tải được file. Hãy thử lại sau ít giây.';return}
+ try{await dl.save({filename:'bai-tap-bai-1.csv',data:csvOf(['Họ tên','Bài','Lần làm','Thời điểm',...WL.map(w=>w[0]),'Tổng điểm (/100)','Kết quả'],bl)});m.textContent=''}
+ catch(e){m.textContent=e&&e.code=='declined'?'':'Chưa tải được file. Hãy thử lại.'}}
+$('#bsub').onclick=()=>{
+ const nm=$('#nm2').value.trim();
+ if(!nm){$('#nm2').focus();$('#nm2').placeholder='Cần nhập họ tên trước khi nộp bài';$('#nm2').style.borderColor='var(--bad)';return}
+ bsb=true;let ok=0,tot=0;const tks=[...$('#lb').children];
+ const cells=tks.map(tk=>{let a=0,n=0;
+  tk.querySelectorAll('select[data-a]').forEach(z=>{n++;const r=z.value===z.dataset.a;if(r)a++;z.classList.remove('ok','bad');z.classList.add(r?'ok':'bad')});
+  const raw=[...tk.querySelectorAll('select:not([data-a]),input')].map(z=>z.value.trim()||'–').join(' | ');
+  tk.querySelectorAll('select,input').forEach(z=>z.disabled=true);tk.querySelectorAll('.bsv,.bed').forEach(x=>x.disabled=true);ok+=a;tot+=n;return n?`${a}/${n}`:raw});
+ const sc=Math.round(ok*100/tot),pass=sc>=90;
+ bl.push([nm,'Bài 1',bat,new Date().toLocaleString('vi-VN'),...cells,sc,pass?'Đạt':'Chưa đạt']);
+ try{localStorage.setItem('bt-log',JSON.stringify(bl))}catch(e){}
+ if(pass)$('#lb').querySelectorAll('select.bad').forEach(z=>z.insertAdjacentHTML('afterend',`<span class="ans">Đáp án: ${z.dataset.a}</span>`));
+ $('#bres').innerHTML=`<div class="big ${pass?'pass':'fail'}" style="margin-top:12px">${sc}<span style="font-size:20px"> / 100</span></div><p><b>${pass?'Đạt.':'Chưa đạt.'}</b> ${pass?'Đáp án của những câu sai đã hiện dưới từng câu.':'Dưới 90 điểm nên chưa hiện đáp án. Hãy chỉ làm lại những câu màu đỏ.'}</p><p>Lần làm: ${bat}</p>${pass?'':'<button class="go" id="bredo">Làm lại những câu sai</button> '}<button class="go" id="bcsv">Tải bảng điểm (CSV)</button>`;
+ $('#bcsv').onclick=expB;bBar();
+ const rd=$('#bredo');if(rd)rd.onclick=()=>{bat++;bsb=false;let first=-1;
+  tks.forEach((tk,i)=>{let any=0;tk.querySelectorAll('select.bad').forEach(z=>{any=1;z.disabled=false;z.value='';z.classList.remove('bad')});
+   if(any){bsaved[i]=false;const b=tk.querySelector('.bsv');b.textContent='Lưu';b.disabled=false;tk.querySelector('.bed').disabled=true;if(first<0)first=i}});
+  $('#bres').innerHTML='';$('#bsub').textContent='Nộp lại';bBar();if(first>=0&&tt.children[first])tt.children[first].click();scrollTo({top:0,behavior:'smooth'})}};
+
+/* ===== BÀI TẬP · BÀI 8 ===== */
+const nu=s=>norm(s).replace(/[üǖǘǚǜ]/g,m=>({'ü':'u','ǖ':'ū','ǘ':'ú','ǚ':'ǔ','ǜ':'ù'}[m]));
+const b8={built:0,saved:[],sub:false,sent:false,at:1,cells:[],sc:0};
+const hd=(z,v)=>`<div style="margin:16px 0 6px"><div class="zh" style="font-weight:700;font-size:20px">${z}</div><div class="vi">${v}</div></div>`;
+const ex=s=>`<div class="guide"><b class="zh" style="font-size:20px">例如：</b><span class="zh" style="font-size:20px">${s}</span></div>`;
+const qi=(n,s,o,a,L)=>`<div class="it qi${s?'':' nos'}"><div class="qs zh" style="font-size:20px">${n}.${s?' '+s:''}</div><div class="qo">${o?o.map((x,i)=>`<span class="op zh" style="font-size:20px">${'ABCD'[i]}. ${x}</span>`).join(''):''}${sl(L||o.map((x,i)=>'ABCD'[i]),a)}</div></div>`;
+const pics=(a,b)=>`<div class="pc" style="grid-template-columns:repeat(auto-fit,minmax(170px,230px));justify-content:center">`+PQ.slice(a,b).map((u,i)=>`<div><b>${'ABCD'[i]}</b><img src="${u}" alt="Hình ${'ABCD'[i]}"></div>`).join('')+'</div>';
+const ABCD=['A','B','C','D'],ABC=['A','B','C'];
+const au=(i,l)=>`<div class="guide">🎧 ${l}<audio controls preload="metadata" src="${AX[i]}"></audio></div>`;
+function W8(){
+ const R=[['Chữ Hán là hệ thống ký hiệu dùng để ghi chép tiếng Hán. Mỗi chữ Hán về cơ bản được tạo thành từ ba yếu tố: hình thể, âm đọc và ý nghĩa. Vì vậy, chữ Hán còn được gọi là chữ biểu ý hoặc chữ ý âm.','汉字是记录汉语的符号，一个汉字基本由形、音、义构成，所以，汉字也被称为表意文字或意音文字。'],
+ ['Cấu tạo của chữ Hán chủ yếu bao gồm nét, bộ kiện và chữ. Thông thường, các nét cấu tạo nên bộ kiện, các bộ kiện kết hợp với nhau tạo thành chữ.','汉字结构主要包括笔画、部件和整字。一般来说，笔画构成部件，部件构成整字。'],
+ ['Nét là những điểm và đường nét tạo nên hình dạng đặc trưng của chữ Hán, là đơn vị cấu tạo nhỏ nhất của chữ Hán. Các nét cơ bản thường dùng trong chữ Hán gồm: nét ngang, nét sổ, nét phẩy, nét mác, nét chấm, nét hất, nét gập và nét móc.','笔画是构成汉字字形特定的点和线，是汉字的最小结构单位。汉字的常用笔画有横、竖、撇、捺、点、提、折、钩。'],
+ ['Bộ kiện được cấu tạo từ các nét. Có những bộ kiện có thể đứng độc lập để tạo thành chữ, nhưng cũng có những bộ kiện không thể đứng độc lập mà phải kết hợp với bộ kiện khác để tạo thành chữ.','部件由笔画组成，有的部件能够独立成字，有的不能成字，需与其他部件组成一个整字。'],
+ ['Chữ do bộ kiện cấu tạo nên và gồm hai loại kết cấu chính: chữ độc thể và chữ hợp thể. Chữ độc thể là chữ do một bộ kiện cấu tạo nên, trong khi đó chữ hợp thể là chữ do hai hoặc nhiều hơn hai bộ kiện cấu tạo nên.','整字由部件组成。整字结构有两种：一种叫独体字，由一个部件组成；另一种叫合体字，由两个或两个以上的部件组成。'],
+ ['Các nét của chữ Hán được viết theo một trật tự nhất định, gọi là thứ tự nét viết (bút thuận).','汉字笔画是有书写顺序的，称为笔顺。']];
+ const T=(n,s,o,a)=>`<div class="it">${n}. ${s} ${sl(o,a)}</div>`;
+ const t1=`<div class="guide"><b class="zh" style="font-size:20px">汉字</b> Chữ Hán<br><b class="zh" style="font-size:20px">汉字书写（一）</b> Viết chữ Hán (1)<br><b class="zh">汉字结构简介</b> Giới thiệu khái quát về cấu tạo chữ Hán</div>`
+  +R.map(r=>`<div class="it"><div class="zh" style="font-size:20px;line-height:1.7">${r[1]}</div><div class="vi" style="margin-top:4px">${r[0]}</div></div>`).join('')
+  +`<div style="margin:18px 0 6px;font-weight:700">Kiểm tra kiến thức vừa đọc</div>`
+  +T(1,'Mỗi chữ Hán về cơ bản được tạo thành từ mấy yếu tố?',['2 yếu tố','3 yếu tố','4 yếu tố'],'3 yếu tố')
+  +T(2,'Ba yếu tố đó là gì?',['hình thể, âm đọc, ý nghĩa','nét, bộ kiện, chữ','độc thể, hợp thể, bút thuận'],'hình thể, âm đọc, ý nghĩa')
+  +T(3,'Đơn vị cấu tạo nhỏ nhất của chữ Hán là gì?',['Nét','Bộ kiện','Chữ'],'Nét')
+  +T(4,'Các nét cơ bản thường dùng trong chữ Hán gồm bao nhiêu loại?',['6 loại','8 loại','10 loại'],'8 loại')
+  +T(5,'Chữ độc thể do mấy bộ kiện tạo nên?',['Một bộ kiện','Hai bộ kiện','Từ ba bộ kiện trở lên'],'Một bộ kiện')
+  +T(6,'Chữ hợp thể do bao nhiêu bộ kiện tạo nên?',['Một bộ kiện','Hai hoặc nhiều hơn hai bộ kiện','Không có bộ kiện nào'],'Hai hoặc nhiều hơn hai bộ kiện')
+  +T(7,'Trật tự viết các nét của chữ Hán gọi là gì?',['Bộ kiện','Chữ độc thể','Thứ tự nét viết (笔顺)'],'Thứ tự nét viết (笔顺)')
+  +T(8,'Đúng hay sai: “Bộ kiện nào cũng có thể đứng độc lập để tạo thành chữ.”',['Đúng','Sai'],'Sai');
+ const t2=au(1,'Ghi âm phần Ngữ âm (语音)')
+  +hd('一、语音','Ngữ âm')+hd('1. 音节辨析（1）','Phân biệt âm tiết (1)')+hd('听录音，选择听到的音节并大声朗读。','Nghe ghi âm, chọn âm tiết nghe được và đọc to.')
+  +[['lián','nián','nián'],['rěn','shěn','rěn'],['diē','tiē','tiē'],['chǎn','chǎng','chǎn'],['liè','lüè','lüè'],['hún','fén','hún'],['bīn','bīng','bīng'],['gǒng','kǒng','gǒng']].map((x,i)=>`<div class="it qi nos"><div class="qs"><b>(${i+1})</b></div><div class="qo"><span class="op">${x[0]}</span><span class="op">${x[1]}</span>${sl([x[0],x[1]],x[2])}</div></div>`).join('')
+  +hd('2. 音节辨析（2）','Phân biệt âm tiết (2)')+hd('听录音，选出不是叠音（或重叠式）的双音节。','Nghe và chọn ra từ có hai âm tiết không phải dạng từ láy (hoặc từ lặp lại).')
+  +[[['tīngting','tīnglì','jiějie'],'B'],[['gēge','gègè','gè kè'],'C'],[['kànkan','kànjiàn','xiǎngxiang'],'B'],[['méiyǒu','mèimei','xièxie'],'A']].map((x,i)=>`<div class="it qi nos"><div class="qs"><b>(${i+1})</b></div><div class="qo">${x[0].map((w,j)=>`<span class="op">${'ABC'[j]}. ${w}</span>`).join('')}${sl(ABC,x[1])}</div></div>`).join('');
+ const t3=au(0,'Ghi âm phần Nghe (模拟测练)')
+  +hd('第一部分','Phần 1')+hd('第1—3题：听短语，选择正确图片。每题听两次。','Câu 1–3: Nghe và chọn hình ảnh phù hợp với nội dung nghe được. Mỗi câu nghe hai lần.')+ex('三个苹果　→ C')+pics(8,11)+[['C',11],['B',14],['A',17]].map((x,i)=>`<div class="it"><div><b>${i+1}.</b></div>${pics(x[1],x[1]+3)}<div class="pcs">${sl(ABC,x[0])}</div></div>`).join('')+hd('第二部分','Phần 2')+hd('第4—5题：听问题，选择正确回答。每题听两次。','Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng. Mỗi câu nghe hai lần.')
+  +ex('今天天气怎么样？　A. 非常热 ✓　B. 很好听　C. 在喝水')
+  +qi(4,'',['去学校','房间外','在吃东西'],'B')+qi(5,'',['我能到','我吃午饭','我不能工作'],'A')
+  +hd('第三部分','Phần 3')+hd('第6—8题：听对话，选择最匹配的图片。每题听两次。','Câu 6–8: Nghe và chọn hình ảnh phù hợp nhất với hội thoại nghe được. Mỗi câu nghe hai lần.')
+  +pics(0,4)+ex('女：你好！　男：你好！很高兴认识你。　→ A')
+  +qi(6,'',null,'D',ABCD)+qi(7,'',null,'C',ABCD)+qi(8,'',null,'B',ABCD)
+  +hd('第四部分','Phần 4')+hd('第9—10题：听句子和问题，选择正确答案。每题听两次。','Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng. Mỗi câu nghe hai lần.')
+  +ex('下午我去超市，我想买一些水果。问：说话人下午去哪里？　A. 超市 ✓　B. 医院　C. 学校')
+  +qi(9,'',['超市','饭店','学校书店'],'C')+qi(10,'',['去学校','看电影','去上班'],'B');
+ const t4=hd('第一部分','Phần 1')+hd('第11—13题：选择与句子最匹配的图片。','Câu 11–13: Chọn hình ảnh phù hợp nhất với câu.')+pics(4,8)+ex('我很喜欢这本书。　→ A')
+  +qi(11,'你的手机在桌子上呢。',null,'B',ABCD)+qi(12,'我在学校吃午饭。',null,'D',ABCD)+qi(13,'这个医院里病人多，医生工作很忙。',null,'C',ABCD)
+  +hd('第二部分','Phần 2')+hd('第14—16题：匹配句子。','Câu 14–16: Nối câu.')
+  +`<div class="zh" style="font-size:20px;text-align:center;margin:6px 0">A. 医院。　B. 我老师。　C. 饺子和面条儿。　D. 好的，谢谢！</div>`+ex('你喝水吗？　→ D')
+  +qi(14,'桌子上有什么？',null,'C',ABCD)+qi(15,'她是谁？',null,'B',ABCD)+qi(16,'你爸爸在哪儿工作？',null,'A',ABCD)
+  +hd('第三部分','Phần 3')+hd('第17—18题：选词填空。','Câu 17–18: Chọn từ thích hợp điền vào chỗ trống.')
+  +`<div class="zh" style="font-size:20px;text-align:center;margin:6px 0">A. 能　B. 有　C. 名字</div>`+ex('你叫什么（C）？')
+  +qi(17,'我的房间里（　）一只小猫。',null,'B',ABC)+qi(18,'男：我们下午在书店见吧。女：好的，我7:00（　）到。',null,'A',ABC)
+  +hd('第四部分','Phần 4')+hd('第19—20题：选择正确答案。','Câu 19–20: Chọn đáp án đúng.')
+  +ex('请问现在几点了？★说话人想知道什么？　A. 时间 ✓　B. 名字　C. 房间号')
+  +qi(19,'昨天爸爸在医院工作，哥哥在家里休息，没去书店。★说话人的哥哥昨天：',['在家里','在书店','在医院工作'],'A')
+  +qi(20,'我喜欢吃米饭，我女朋友不喜欢。★说话人的女朋友不喜欢吃：',['米饭','包子','面条儿'],'A');
+ return [t1,t2,t3,t4]}
+function buildB8(){b8.built=1;
+ $('#lb8').innerHTML=W8().map((h,i)=>`<div class="tk${i?' hide':''}">${h}</div>`).join('');
+ const T=[...$('#lb8').children];b8.saved=T.map(tk=>!tk.querySelector('select,input'));
+ T.forEach((tk,i)=>{if(!b8.saved[i])tk.insertAdjacentHTML('beforeend','<button class="go bsv8">Lưu</button> <button class="go ghost bed8" disabled>Sửa bài</button>')});b8bar()}
+function b8bar(){const n=b8.saved.filter(Boolean).length;$('#st8').textContent=`Đã lưu ${n}/${b8.saved.length}`;$('#sub8').disabled=!b8.saved.length||n<b8.saved.length||b8.sub||b8.sent}
+$('#lb8').addEventListener('click',e=>{const b=e.target.closest('.bsv8,.bed8');if(!b||b8.sub||b8.sent)return;const tk=b.closest('.tk'),i=[...$('#lb8').children].indexOf(tk),sv=tk.querySelector('.bsv8'),ed=tk.querySelector('.bed8');
+ if(b.classList.contains('bsv8')){if(b8.saved[i])return;b8.saved[i]=true;tk.querySelectorAll('select,input').forEach(z=>z.disabled=true);sv.textContent='Đã lưu ✓';sv.disabled=true;ed.disabled=false}
+ else{if(!b8.saved[i])return;b8.saved[i]=false;tk.querySelectorAll('select,input').forEach(z=>{if(!z.classList.contains('ok'))z.disabled=false});sv.textContent='Lưu';sv.disabled=false;ed.disabled=true}
+ b8bar()});
+['input','change'].forEach(ev=>$('#lb8').addEventListener(ev,e=>{const f=e.target;if(ev=='input'&&f.classList&&f.classList.contains('f8')&&/[1-5]/.test(f.value))f.value=conv(f.value);const tk=f.closest('.tk');if(!tk||b8.sent)return;const i=[...$('#lb8').children].indexOf(tk),b=tk.querySelector('.bsv8');if(b&&b8.saved[i]){b8.saved[i]=false;b.textContent='Lưu';b.disabled=false;b8bar()}}));
+const skey=nm=>'b8-sent-'+nm.toLowerCase();
+const wasSent=nm=>{try{return !!localStorage.getItem(skey(nm))}catch(e){return false}};
+$('#sub8').onclick=()=>{const nm=$('#nm8').value.trim(),m=$('#msg8');m.textContent='';
+ if(!nm){$('#nm8').focus();$('#nm8').placeholder='Cần nhập họ tên trước khi nộp bài';$('#nm8').style.borderColor='var(--bad)';return}
+ if(wasSent(nm)){m.textContent='Họ tên này đã gửi kết quả Bài 8, không thể gửi lại.';return}
+ b8.sub=true;let ok=0,tot=0;const T=[...$('#lb8').children];
+ b8.cells=T.map(tk=>{let a=0,n=0;
+  tk.querySelectorAll('[data-a]').forEach(z=>{n++;const r=z.tagName=='INPUT'?nu(z.value)===nu(z.dataset.a):z.value===z.dataset.a;if(r)a++;z.classList.remove('ok','bad');z.classList.add(r?'ok':'bad')});
+  const raw=[...tk.querySelectorAll('select:not([data-a])')].map(z=>z.value||'–').join(' | ');
+  tk.querySelectorAll('select,input').forEach(z=>z.disabled=true);ok+=a;tot+=n;return n?`${a}/${n}`:(raw||'–')});
+ b8.sc=Math.round(ok*100/tot);const pass=b8.sc>=85;T.forEach(tk=>tk.querySelectorAll('.bsv8,.bed8').forEach(x=>x.disabled=true));
+ if(pass)$('#lb8').querySelectorAll('.bad[data-a]').forEach(z=>z.insertAdjacentHTML('afterend',`<span class="ans">Đáp án: ${z.dataset.a}</span>`));
+ $('#res8').innerHTML=`<div class="big ${pass?'pass':'fail'}" style="margin-top:12px">${b8.sc}<span style="font-size:20px"> / 100</span></div><p><b>${pass?'Đạt.':'Chưa đạt.'}</b> ${pass?'Bạn được phép gửi kết quả (chỉ một lần). Đáp án các câu sai đã hiện dưới từng câu.':'Dưới 85 điểm nên chưa được gửi kết quả. Hãy làm lại những câu màu đỏ.'}</p><p>Lần làm: ${b8.at}</p>${pass?'<button class="go" id="send8">Gửi kết quả</button>':'<button class="go" id="redo8">Làm lại những câu sai</button>'}`;
+ b8bar();
+ const sd=$('#send8');if(sd)sd.onclick=async()=>{if(b8.sent)return;
+  if(!dl){m.textContent='Chưa gửi được. Hãy thử lại sau ít giây.';return}
+  try{await dl.save({filename:'bai-tap-bai-8.csv',data:csvOf(['Họ tên','Bài','Lần làm','Thời điểm','Tìm hiểu thêm','Ngữ âm','Phần Nghe','Phần Đọc','Tổng điểm (/100)','Kết quả'],[[nm,'Bài 8',b8.at,new Date().toLocaleString('vi-VN'),...b8.cells,b8.sc,'Đạt']])});
+   try{localStorage.setItem(skey(nm),'1')}catch(e){}
+   b8.sent=true;sd.disabled=true;sd.textContent='Đã gửi ✓';m.textContent='Đã gửi kết quả. Mỗi học sinh chỉ được gửi một lần.';b8bar()}
+  catch(e){m.textContent=e&&e.code=='declined'?'':'Chưa gửi được. Hãy thử lại.'}};
+ const rd=$('#redo8');if(rd)rd.onclick=()=>{b8.at++;b8.sub=false;let first=-1;
+  T.forEach((tk,i)=>{let any=0;tk.querySelectorAll('.bad[data-a]').forEach(z=>{any=1;z.disabled=false;z.value='';z.classList.remove('bad')});
+   if(any){b8.saved[i]=false;const b=tk.querySelector('.bsv8');b.textContent='Lưu';b.disabled=false;tk.querySelector('.bed8').disabled=true;if(first<0)first=i}});
+  $('#res8').innerHTML='';$('#sub8').textContent='Nộp lại';b8bar();if(first>=0&&tt.children[first])tt.children[first].click();scrollTo({top:0,behavior:'smooth'})}};
+PQ.push(...["assets/b8-b2-01.jpg", "assets/b8-b2-02.jpg", "assets/b8-b2-03.jpg", "assets/b8-b2-04.jpg", "assets/b8-b2-05.jpg", "assets/b8-b2-06.jpg", "assets/b8-b2-07.jpg", "assets/b8-b2-08.jpg", "assets/b8-b2-09.jpg", "assets/b8-b2-10.jpg", "assets/b8-b2-11.jpg", "assets/b8-b2-12.jpg", "assets/b8-b2-13.jpg", "assets/b8-b2-14.jpg", "assets/b8-b2-15.jpg", "assets/b8-b2-16.jpg"]);
+const AX7=["assets/b7-nghe-01.mp3", "assets/b7-nghe-02.mp3"];
+
+const au7=(i,l)=>`<div class="guide">🎧 ${l}<audio controls preload="metadata" src="${AX7[i]}"></audio></div>`;
+const px=ix=>`<div class="pc" style="grid-template-columns:repeat(auto-fit,minmax(170px,230px));justify-content:center">`+ix.map((k,i)=>`<div><b>${'ABCD'[i]}</b><img src="${PQ[k]}" alt="Hình ${'ABCD'[i]}"></div>`).join('')+'</div>';
+const rowp=(n,x,y,a,tag)=>`<div class="it qi nos"><div class="qs"><b>(${n})</b>${tag?` <span class="vi">${tag}</span>`:''}</div><div class="qo"><span class="op">${x}</span><span class="op">${y}</span>${sl([x,y],a)}</div></div>`;
+function W7(){
+ const th=(z,v)=>`<div class="it"><div class="zh" style="font-size:20px;line-height:1.7">${z}</div><div class="vi" style="margin-top:4px">${v}</div></div>`;
+ const T=(n,s,o,a)=>`<div class="it">${n}. ${s} ${sl(o,a)}</div>`;
+ const t1=`<div class="guide"><b class="zh" style="font-size:20px">汉字简介</b> Giới thiệu khái quát về chữ Hán</div>`
+  +th('汉字发祥于古老的中国，是世界上最古老的文字之一，也是世界上唯一一个从古代演变至今、从未间断使用的文字。','Chữ Hán có nguồn gốc từ Trung Quốc cổ đại, là một trong những hệ thống chữ viết lâu đời nhất trên thế giới, đồng thời cũng là hệ thống chữ viết duy nhất được sử dụng liên tục từ thời cổ đại cho đến ngày nay.')
+  +th('汉字是记录汉语的符号。历史上，汉字经历了甲骨文、金文、篆书、隶书、楷书、草书、行书等形式，这些形式至今仍在书法艺术中被使用。其中，楷书是汉字的标准字体。','Chữ Hán là hệ thống ký hiệu dùng để ghi chép tiếng Hán. Trong lịch sử phát triển của mình, chữ Hán đã trải qua các hình thức như chữ Giáp cốt, chữ Kim, chữ Triện, chữ Lệ, chữ Khải, chữ Thảo và chữ Hành. Đến nay, những loại hình chữ viết này vẫn được sử dụng trong nghệ thuật thư pháp. Trong đó, chữ Khải được xem là kiểu chữ chuẩn của chữ Hán hiện đại.')
+  +th('汉字以象形字为基础，以形声字为主体，现代汉字中形声字比例高达90%左右，为人们学习汉字提供了便利。','Chữ Hán được hình thành trên cơ sở chữ tượng hình, trong đó chữ hình thanh chiếm tỷ lệ lớn nhất. Trong hệ thống chữ Hán hiện đại, chữ hình thanh chiếm khoảng 90% tổng số chữ, tạo điều kiện thuận lợi cho người học trong quá trình nhận biết và ghi nhớ chữ Hán.')
+  +th('汉字是形、音、义一体的文字形式。一般情况下，根据文字形式，就可推知其意义和读音。例如：“材”，“才”提示该字的读音，“木”（木字旁）是偏旁，表明与树木相关；“花”，“化”提示该字的读音，“艹”（草字头）是偏旁，表明与花草植物相关。','Chữ Hán là hệ thống chữ viết kết hợp giữa hình thể, âm đọc và ý nghĩa. Trong nhiều trường hợp, người học có thể suy đoán cách đọc và ý nghĩa thông qua hình thể của chữ. Ví dụ: ở chữ “材”, “才” gợi ý cách đọc, còn “木” (bộ Mộc) biểu thị ý nghĩa liên quan đến cây cối; ở chữ “花”, “化” gợi ý cách đọc, còn “艹” (bộ Thảo) biểu thị ý nghĩa liên quan đến thực vật hoặc hoa cỏ.')
+  +th('随着数字时代的到来，借助汉语拼音来识读汉字的途径和方式更加丰富，进一步方便了学习者掌握汉字，提升汉语阅读水平。','Trong thời đại số, cùng với sự phát triển của công nghệ, các phương thức nhận diện và học chữ Hán thông qua hệ thống phiên âm (Pinyin) ngày càng đa dạng. Điều này giúp người học tiếp cận chữ Hán thuận lợi hơn, nâng cao khả năng nhận biết chữ Hán và phát triển năng lực đọc hiểu tiếng Hán.')
+  +`<div style="margin:18px 0 6px;font-weight:700">Kiểm tra kiến thức vừa đọc</div>`
+  +T(1,'Chữ Hán có nguồn gốc từ đâu?',['Trung Quốc cổ đại','Nhật Bản cổ đại','Ai Cập cổ đại'],'Trung Quốc cổ đại')
+  +T(2,'Điều gì đúng với chữ Hán so với các hệ thống chữ viết khác?',['Là hệ thống chữ viết duy nhất được sử dụng liên tục từ cổ đại đến nay','Chỉ được dùng trong thư pháp','Đã ngừng sử dụng từ lâu'],'Là hệ thống chữ viết duy nhất được sử dụng liên tục từ cổ đại đến nay')
+  +T(3,'Kiểu chữ nào được xem là chữ chuẩn của chữ Hán hiện đại?',['Chữ Giáp cốt','Chữ Khải (楷书)','Chữ Thảo'],'Chữ Khải (楷书)')
+  +T(4,'Chữ hình thanh chiếm khoảng bao nhiêu % trong chữ Hán hiện đại?',['50%','70%','90%'],'90%')
+  +T(5,'Chữ Hán được hình thành trên cơ sở loại chữ nào?',['Chữ tượng hình','Chữ ghi âm','Chữ số'],'Chữ tượng hình')
+  +T(6,'Trong chữ “材”, thành phần nào gợi ý cách đọc?',['木','才','Cả hai'],'才')
+  +T(7,'Trong chữ “花”, “艹” (bộ Thảo) biểu thị ý nghĩa liên quan đến điều gì?',['Cây cối','Thực vật, hoa cỏ','Nước'],'Thực vật, hoa cỏ')
+  +T(8,'Đúng hay sai: “Các hình thức chữ như Giáp cốt, Triện, Lệ ngày nay không còn được dùng ở đâu nữa.”',['Đúng','Sai'],'Sai');
+ const t2=au7(1,'Ghi âm phần Ngữ âm (语音)')+hd('一、语音','Ngữ âm')
+  +hd('1. 送气声母和不送气声母辨析','Phân biệt thanh mẫu bật hơi và thanh mẫu không bật hơi')
+  +th('送气声母和不送气声母是汉语语音的一大特色，送气声母和不送气声母都是成对的，共六组：“b和p、d和t、g和k、j和q、zh和ch、z和c”。','Thanh mẫu bật hơi và thanh mẫu không bật hơi là một điểm đặc trưng của ngữ âm tiếng Trung Quốc, thanh mẫu bật hơi và thanh mẫu không bật hơi đều đi theo cặp, tổng cộng có sáu nhóm: “b và p, d và t, g và k, j và q, zh và ch, z và c”.')
+  +T(1,'Thanh mẫu bật hơi và không bật hơi đi theo cặp, tổng cộng có mấy nhóm?',['4 nhóm','5 nhóm','6 nhóm'],'6 nhóm')
+  +T(2,'Thanh mẫu nào đi cặp với “b”?',['p','d','g'],'p')
+  +T(3,'Thanh mẫu nào đi cặp với “zh”?',['ch','z','c'],'ch')
+  +hd('听录音，分辨送气声母和不送气声母，并大声朗读。','Nghe ghi âm, phân biệt thanh mẫu bật hơi và thanh mẫu không bật hơi, đồng thời đọc to.')
+  +`<div class="vi">Thanh mẫu bật hơi: p, t, k, q, ch, c. Thanh mẫu không bật hơi: b, d, g, j, zh, z. Chọn âm tiết có thanh mẫu <b>bật hơi</b>.</div>`
+  +[['gǔ','kǔ','kǔ'],['diān','tiān','tiān'],['dòng','tòng','tòng'],['jiǔ','qiǔ','qiǔ'],['zēng','cēng','cēng'],['zhǔn','chǔn','chǔn'],['zhí','chí','chí'],['zì','cì','cì'],['bái','pái','pái'],['bēn','pēn','pēn'],['jǔ','qǔ','qǔ'],['guā','kuā','kuā']].map((x,i)=>rowp(i+1,x[0],x[1],x[2])).join('')
+  +hd('2. 前鼻音韵母和后鼻音韵母辨析','Phân biệt vận mẫu âm mũi trước và vận mẫu âm mũi sau')
+  +th('汉语中前鼻音韵母是指以“-n”结尾的韵母，后鼻音韵母是指以“-ng”结尾的韵母。','Trong tiếng Trung Quốc, vận mẫu âm mũi trước chỉ các vận mẫu kết thúc bằng “-n”, vận mẫu âm mũi sau chỉ các vận mẫu kết thúc bằng “-ng”.')
+  +T(4,'Vận mẫu âm mũi trước kết thúc bằng âm nào?',['-n','-ng','-m'],'-n')
+  +T(5,'Vận mẫu âm mũi sau kết thúc bằng âm nào?',['-n','-ng','-m'],'-ng')
+  +hd('听录音，分辨前鼻音韵母和后鼻音韵母，并大声朗读。','Nghe ghi âm, phân biệt vận mẫu âm mũi trước và vận mẫu âm mũi sau, đồng thời đọc to.')
+  +`<div class="vi">Chọn âm tiết có vận mẫu <b>âm mũi sau (-ng)</b>.</div>`
+  +[['pén','péng'],['rǎn','rǎng'],['nián','niáng'],['jiàn','jiàng'],['gǎn','gǎng'],['mén','méng'],['sēn','sēng'],['zàn','zàng'],['shēn','shēng'],['huán','huáng'],['fàn','fàng'],['chēn','chēng'],['lín','líng'],['xiǎn','xiǎng'],['bìn','bìng'],['qīn','qīng']].map((x,i)=>i%2?rowp(i+1,x[1],x[0],x[1]):rowp(i+1,x[0],x[1],x[1])).join('');
+ const t3=au7(0,'Ghi âm phần Nghe (模拟测练)')
+  +hd('第一部分','Phần 1')+hd('第1—3题：听短语，选择正确图片。每题听两次。','Câu 1–3: Nghe và chọn hình ảnh phù hợp với nội dung nghe được. Mỗi câu nghe hai lần.')+ex('三个苹果　→ C')+pics(8,11)
+  +[['C',20],['A',23],['C',26]].map((x,i)=>`<div class="it"><div><b>${i+1}.</b></div>${px([x[1],x[1]+1,x[1]+2])}<div class="pcs">${sl(ABC,x[0])}</div></div>`).join('')
+  +hd('第二部分','Phần 2')+hd('第4—5题：听问题，选择正确回答。每题听两次。','Câu 4–5: Nghe câu hỏi, chọn câu trả lời đúng. Mỗi câu nghe hai lần.')
+  +ex('今天天气怎么样？　A. 非常热 ✓　B. 很好听　C. 在喝水')
+  +qi(4,'',['10:00','12:00','12号'],'B')+qi(5,'',['8月','三分钟','7:10'],'C')
+  +hd('第三部分','Phần 3')+hd('第6—8题：听对话，选择最匹配的图片。每题听两次。','Câu 6–8: Nghe và chọn hình ảnh phù hợp nhất với hội thoại nghe được. Mỗi câu nghe hai lần.')
+  +px([0,29,30,31])+ex('女：你好！　男：你好！很高兴认识你。　→ A')
+  +qi(6,'',null,'C',ABCD)+qi(7,'',null,'D',ABCD)+qi(8,'',null,'B',ABCD)
+  +hd('第四部分','Phần 4')+hd('第9—10题：听句子和问题，选择正确答案。每题听两次。','Câu 9–10: Nghe câu và câu hỏi, chọn đáp án đúng. Mỗi câu nghe hai lần.')
+  +ex('下午我去超市，我想买一些水果。问：说话人下午去哪里？　A. 超市 ✓　B. 医院　C. 学校')
+  +qi(9,'',['上课','上班','看电影'],'A')+qi(10,'',['饭店','菜店','超市'],'C');
+ const t4=hd('第一部分','Phần 1')+hd('第11—13题：选择与句子最匹配的图片。','Câu 11–13: Chọn hình ảnh phù hợp nhất với câu.')+px([32,33,34,35])+ex('我很喜欢这本书。　→ A')
+  +qi(11,'我在上课呢。',null,'D',ABCD)+qi(12,'我下午有事，晚上7:00见吧。',null,'C',ABCD)+qi(13,'今天不上班，我去超市买东西。',null,'B',ABCD)
+  +hd('第二部分','Phần 2')+hd('第14—16题：匹配句子。','Câu 14–16: Nối câu.')
+  +`<div class="zh" style="font-size:20px;text-align:center;margin:6px 0">A. 早上七点半。　B. 对不起，我有课。　C. 电影院。　D. 好的，谢谢！</div>`+ex('你喝水吗？　→ D')
+  +qi(14,'我们在哪儿见？',null,'C',ABCD)+qi(15,'现在几点？',null,'A',ABCD)+qi(16,'我们下午去超市吧。',null,'B',ABCD)
+  +hd('第三部分','Phần 3')+hd('第17—18题：选词填空。','Câu 17–18: Chọn từ thích hợp điền vào chỗ trống.')
+  +`<div class="zh" style="font-size:20px;text-align:center;margin:6px 0">A. 医院　B. 中午　C. 名字</div>`+ex('你叫什么（C）？')
+  +qi(17,'我们（　）12:00下课。',null,'B',ABC)+qi(18,'男：你现在在哪儿？女：我在（　）呢。',null,'A',ABC)
+  +hd('第四部分','Phần 4')+hd('第19—20题：选择正确答案。','Câu 19–20: Chọn đáp án đúng.')
+  +ex('请问现在几点了？★说话人想知道什么？　A. 时间 ✓　B. 名字　C. 房间号')
+  +qi(19,'我今天早上八点半上课，十点十分下课。★说话人今天几点下课？',['8:30','10:10','10:20'],'B')
+  +qi(20,'妈妈今天休息，下午想去菜店买些菜。★妈妈下午想去菜店买：',['菜','饺子','牛奶'],'A');
+ return [t1,t2,t3,t4]}
+
+const b7={built:0,saved:[],sub:false,sent:false,at:1,cells:[],sc:0};
+function buildB7(){b7.built=1;
+ $('#lb7').innerHTML=W7().map((h,i)=>`<div class="tk${i?' hide':''}">${h}</div>`).join('');
+ const T=[...$('#lb7').children];b7.saved=T.map(tk=>!tk.querySelector('select,input'));
+ T.forEach((tk,i)=>{if(!b7.saved[i])tk.insertAdjacentHTML('beforeend','<button class="go bsv7">Lưu</button> <button class="go ghost bed7" disabled>Sửa bài</button>')});b7bar()}
+function b7bar(){const n=b7.saved.filter(Boolean).length;$('#st7').textContent=`Đã lưu ${n}/${b7.saved.length}`;$('#sub7').disabled=!b7.saved.length||n<b7.saved.length||b7.sub||b7.sent}
+$('#lb7').addEventListener('click',e=>{const b=e.target.closest('.bsv7,.bed7');if(!b||b7.sub||b7.sent)return;const tk=b.closest('.tk'),i=[...$('#lb7').children].indexOf(tk),sv=tk.querySelector('.bsv7'),ed=tk.querySelector('.bed7');
+ if(b.classList.contains('bsv7')){if(b7.saved[i])return;b7.saved[i]=true;tk.querySelectorAll('select,input').forEach(z=>z.disabled=true);sv.textContent='Đã lưu ✓';sv.disabled=true;ed.disabled=false}
+ else{if(!b7.saved[i])return;b7.saved[i]=false;tk.querySelectorAll('select,input').forEach(z=>{if(!z.classList.contains('ok'))z.disabled=false});sv.textContent='Lưu';sv.disabled=false;ed.disabled=true}
+ b7bar()});
+['input','change'].forEach(ev=>$('#lb7').addEventListener(ev,e=>{const f=e.target;if(ev=='input'&&f.classList&&f.classList.contains('f8')&&/[1-5]/.test(f.value))f.value=conv(f.value);const tk=f.closest('.tk');if(!tk||b7.sent)return;const i=[...$('#lb7').children].indexOf(tk),b=tk.querySelector('.bsv7');if(b&&b7.saved[i]){b7.saved[i]=false;b.textContent='Lưu';b.disabled=false;b7bar()}}));
+const skey7=nm=>'b7-sent-'+nm.toLowerCase();
+const wasSent7=nm=>{try{return !!localStorage.getItem(skey7(nm))}catch(e){return false}};
+$('#sub7').onclick=()=>{const nm=$('#nm7').value.trim(),m=$('#msg7');m.textContent='';
+ if(!nm){$('#nm7').focus();$('#nm7').placeholder='Cần nhập họ tên trước khi nộp bài';$('#nm7').style.borderColor='var(--bad)';return}
+ if(wasSent7(nm)){m.textContent='Họ tên này đã gửi kết quả Bài 7, không thể gửi lại.';return}
+ b7.sub=true;let ok=0,tot=0;const T=[...$('#lb7').children];
+ b7.cells=T.map(tk=>{let a=0,n=0;
+  tk.querySelectorAll('[data-a]').forEach(z=>{n++;const r=z.tagName=='INPUT'?nu(z.value)===nu(z.dataset.a):z.value===z.dataset.a;if(r)a++;z.classList.remove('ok','bad');z.classList.add(r?'ok':'bad')});
+  const raw=[...tk.querySelectorAll('select:not([data-a])')].map(z=>z.value||'–').join(' | ');
+  tk.querySelectorAll('select,input').forEach(z=>z.disabled=true);ok+=a;tot+=n;return n?`${a}/${n}`:(raw||'–')});
+ b7.sc=Math.round(ok*100/tot);const pass=b7.sc>=85;T.forEach(tk=>tk.querySelectorAll('.bsv7,.bed7').forEach(x=>x.disabled=true));
+ if(pass)$('#lb7').querySelectorAll('.bad[data-a]').forEach(z=>z.insertAdjacentHTML('afterend',`<span class="ans">Đáp án: ${z.dataset.a}</span>`));
+ $('#res7').innerHTML=`<div class="big ${pass?'pass':'fail'}" style="margin-top:12px">${b7.sc}<span style="font-size:20px"> / 100</span></div><p><b>${pass?'Đạt.':'Chưa đạt.'}</b> ${pass?'Bạn được phép gửi kết quả (chỉ một lần). Đáp án các câu sai đã hiện dưới từng câu.':'Dưới 85 điểm nên chưa được gửi kết quả. Hãy làm lại những câu màu đỏ.'}</p><p>Lần làm: ${b7.at}</p>${pass?'<button class="go" id="send7">Gửi kết quả</button>':'<button class="go" id="redo7">Làm lại những câu sai</button>'}`;
+ b7bar();
+ const sd=$('#send7');if(sd)sd.onclick=async()=>{if(b7.sent)return;
+  if(!dl){m.textContent='Chưa gửi được. Hãy thử lại sau ít giây.';return}
+  try{await dl.save({filename:'bai-tap-bai-7.csv',data:csvOf(['Họ tên','Bài','Lần làm','Thời điểm','Tìm hiểu thêm','Ngữ âm','Phần Nghe','Phần Đọc','Tổng điểm (/100)','Kết quả'],[[nm,'Bài 7',b7.at,new Date().toLocaleString('vi-VN'),...b7.cells,b7.sc,'Đạt']])});
+   try{localStorage.setItem(skey7(nm),'1')}catch(e){}
+   b7.sent=true;sd.disabled=true;sd.textContent='Đã gửi ✓';m.textContent='Đã gửi kết quả. Mỗi học sinh chỉ được gửi một lần.';b7bar()}
+  catch(e){m.textContent=e&&e.code=='declined'?'':'Chưa gửi được. Hãy thử lại.'}};
+ const rd=$('#redo7');if(rd)rd.onclick=()=>{b7.at++;b7.sub=false;let first=-1;
+  T.forEach((tk,i)=>{let any=0;tk.querySelectorAll('.bad[data-a]').forEach(z=>{any=1;z.disabled=false;z.value='';z.classList.remove('bad')});
+   if(any){b7.saved[i]=false;const b=tk.querySelector('.bsv7');b.textContent='Lưu';b.disabled=false;tk.querySelector('.bed7').disabled=true;if(first<0)first=i}});
+  $('#res7').innerHTML='';$('#sub7').textContent='Nộp lại';b7bar();if(first>=0&&tt.children[first])tt.children[first].click();scrollTo({top:0,behavior:'smooth'})}};
+
+render();$('#sall').onclick=submitAll;{const e=$('#le');e.textContent='Chọn một mục ở thanh bên trái để bắt đầu.';e.classList.remove('hide')}
+const blobDl={save:async({filename,data})=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/csv;charset=utf-8'}));a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}};
+const setDl=d=>{dl=d||blobDl;if($('#csv'))$('#csv').classList.remove('hide')};
+if(window.claude&&claude.use)claude.use('downloads').then(setDl).catch(()=>setDl(null));else setDl(null);
+</script></body></html>
